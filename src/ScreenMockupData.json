@@ -1,0 +1,31 @@
+[{
+	"id": 1,
+	"user": "Jennifer Pinsker",
+	"idnumber": "0012263890084",
+	"gender": "F",
+	"contactdetails": {
+		"number": "7275849503",
+		"email": "jennifer.pinsker@gmail.com"
+	},
+	"addressdetails": {
+		"number": "15",
+		"street": "Juniper Street",
+		"suburb": "Waldenstate",
+		"postalcode": 1234
+	}
+}, {
+	"id": 2,
+	"user": "Bob Robson",
+	"idnumber": "8001238906085",
+	"gender": "M",
+	"contactdetails": {
+		"number": "0127789654",
+		"email": "brobson@junkmail.co.za"
+	},
+	"addressdetails": {
+		"number": "2C",
+		"street": "Pinket Estate, Jackson Drive",
+		"suburb": "Mollywood",
+		"postalcode": 7569
+	}
+}]
