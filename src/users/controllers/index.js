@@ -55,13 +55,42 @@ module.exports = {
     })
   },
   getUsers: (request, response) => {
+    const { offset } = request.query
     return new Promise((resolve, reject) => {
-      database.all('SELECT * FROM user', [], (error, rows) => {
-        if (error) {
-          return reject(error)
-        }
-        resolve(response.status(200).send(rows))
+      database.all('SELECT COUNT(*) FROM user', [], (error, rows) => {
+        const total = rows[0]['COUNT(*)']
+        const pages = Math.ceil(total / 5)
+        database.all(
+          'SELECT * FROM user LIMIT 5 OFFSET ?',
+          [offset],
+          (error, rows) => {
+            if (error) {
+              return reject(error)
+            }
+            const data = {
+              users: rows,
+              total,
+              pages
+            }
+            resolve(response.status(200).send(data))
+          }
+        )
       })
+    })
+  },
+  searchUsers: (request, response) => {
+    const { search } = request.body
+    return new Promise((resolve, reject) => {
+      database.all(
+        'SELECT * FROM user WHERE user LIKE ? OR idNumber LIKE ? LIMIT 5',
+        ['%' + search + '%', '%' + search + '%'],
+        (error, rows) => {
+          if (error) {
+            return reject(error)
+          }
+          resolve(response.status(200).send(rows))
+        }
+      )
     })
   }
 }
